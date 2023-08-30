@@ -1,4 +1,4 @@
-import 'package:barcode_scan/barcode_scan.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:forest_tagger/DataModels/Tree.dart';
@@ -29,7 +29,8 @@ class ScannerPageState extends State<ScannerPage> {
                 child: TextButton(
                   // padding: EdgeInsets.all(15.0),
                   onPressed: () async {
-                    String res = await BarcodeScanner.scan();
+                    String res = await FlutterBarcodeScanner.scanBarcode(
+                        '#ff6666', 'Cancel', true, ScanMode.BARCODE);
                     var arr = res.split(", ");
                     Tree t = Tree(arr[0], (arr[1]), (arr[2]));
                     TreeProvider().insert(t);
