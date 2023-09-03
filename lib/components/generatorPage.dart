@@ -1,4 +1,4 @@
-// import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
@@ -120,7 +120,7 @@ class GeneratorPageState extends State<GeneratorPage> {
                   style: ElevatedButton.styleFrom(
                       padding:
                           EdgeInsets.symmetric(vertical: 15, horizontal: 30),
-                      primary: Colors.green,
+                      primary: Color(0xFF4CAF50),
                       shape: RoundedRectangleBorder(
                           side: BorderSide(color: Colors.green, width: 3.0),
                           borderRadius: BorderRadius.circular(5.0))),
@@ -153,13 +153,13 @@ class GeneratorPageState extends State<GeneratorPage> {
                           MaterialPageRoute(
                               builder: (context) => QRShower(data)));
                     } else {
-                      Toast.show(
-                        "Please enter the data",
-                        context,
-                        duration: Toast.LENGTH_LONG,
-                        gravity: Toast.BOTTOM,
-                        textColor: Colors.white,
-                      );
+                      // Toast.show(
+                      //   "Please enter the data",
+                      //   context,
+                      //   duration: Toast.LENGTH_LONG,
+                      //   gravity: Toast.BOTTOM,
+                      //   textColor: Colors.white,
+                      // );
                     }
                   },
                 )

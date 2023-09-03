@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
-      home: HomeScreen("hari"),
+      home: HomeScreen("Hari"),
     );
   }
 }

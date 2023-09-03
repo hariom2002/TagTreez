@@ -1,10 +1,21 @@
 import 'dart:io';
 import 'dart:typed_data';
+import 'package:path_provider/path_provider.dart';
 import 'package:random_string/random_string.dart';
-import 'package:downloads_path_provider/downloads_path_provider.dart';
+import 'package:lecle_downloads_path_provider/lecle_downloads_path_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:forest_tagger/components/backButton.dart';
+import 'package:social_share/social_share.dart';
+
+import 'dart:io';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:path_provider/path_provider.dart';
+import 'dart:async';
+import 'package:screenshot/screenshot.dart';
+import 'package:social_share/social_share.dart';
 
 import 'package:permission_handler/permission_handler.dart';
 import 'package:pretty_qr_code/pretty_qr_code.dart';
@@ -26,8 +37,7 @@ class QRShower extends StatefulWidget {
 }
 
 class QRShowerState extends State<QRShower> {
-  Future<Directory> _getDownloadsPath =
-      DownloadsPathProvider.downloadsDirectory;
+  Future<Directory> _getDownloadsPath = DownloadsPath.downloadsDirectory();
 
   Uint8List _imageFile;
 
@@ -38,6 +48,7 @@ class QRShowerState extends State<QRShower> {
     return Material(
       child: Stack(
         children: [
+          // remove below image...
           Center(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -75,6 +86,21 @@ class QRShowerState extends State<QRShower> {
                     });
                     onCheckPermission();
                   },
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    _shareQRCode();
+                  },
+                  child: Text(
+                    'Share QR Code',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                    ),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    primary: Color(0xFF4CAF50), // Customize button color
+                  ),
                 ),
               ],
             ),
@@ -135,4 +161,15 @@ class QRShowerState extends State<QRShower> {
 
     return downloadsDir.path;
   }
+}
+
+Future<String> _shareQRCode() async {
+  final file = await ImagePicker.pickImage(
+    source: ImageSource.gallery,
+  );
+  var path = file?.path;
+  if (path == null) {
+    return null;
+  }
+  return file?.path;
 }
