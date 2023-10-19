@@ -43,6 +43,7 @@ dependencies:
   downloads_path_provider: ^0.1.0
   path_provider:
   toast:
+  mysql1: ^0.17.1
 
 dev_dependencies:
   flutter_test:

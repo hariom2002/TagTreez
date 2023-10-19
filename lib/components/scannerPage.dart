@@ -26,32 +26,35 @@ class ScannerPageState extends State<ScannerPage> {
             children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: TextButton(
-                  // padding: EdgeInsets.all(15.0),
-                  onPressed: () async {
-                    String res = await FlutterBarcodeScanner.scanBarcode(
-                        '#ff6666', 'Cancel', true, ScanMode.BARCODE);
-                    var arr = res.split(", ");
-                    Tree t = Tree(arr[0], (arr[1]), (arr[2]));
-                    TreeProvider().insert(t);
-                    List<Tree> newList = [];
-                    listOfScanneedTrees.forEach((element) {
-                      newList.add(element);
-                    });
-                    newList.add(t);
-                    setState(() {
-                      listOfScanneedTrees = newList;
-                    });
-                  },
-                  child: Text(
-                    'Open Scanner',
-                    style: TextStyle(
-                        color: Colors.lightGreen, fontWeight: FontWeight.bold),
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20.0),
+                    border: Border.all(color: Colors.green, width: 3.0),
                   ),
-                  // shape: RoundedRectangleBorder(
-                  //     side: BorderSide(color: Colors.green, width: 3.0),
-                  //     borderRadius: BorderRadius.circular(20.0)
-                  // ),
+                  child: TextButton(
+                    onPressed: () async {
+                      String res = await FlutterBarcodeScanner.scanBarcode(
+                          '#ff6666', 'Cancel', true, ScanMode.BARCODE);
+                      var arr = res.split(", ");
+                      Tree t = Tree(arr[0], (arr[1]), (arr[2]));
+                      TreeProvider().insert(t);
+                      List<Tree> newList = [];
+                      listOfScanneedTrees.forEach((element) {
+                        newList.add(element);
+                      });
+                      newList.add(t);
+                      setState(() {
+                        listOfScanneedTrees = newList;
+                      });
+                    },
+                    child: Text(
+                      'Open Scanner',
+                      style: TextStyle(
+                        color: Colors.lightGreen,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
                 ),
               ),
               Padding(
